@@ -1,5 +1,6 @@
 package com.ly.sys.act;
 
+import com.ly.comm.CacheData;
 import java.util.List;
 import java.util.Map;
 
@@ -26,62 +27,86 @@ import java.util.HashMap;
 import org.nutz.dao.Cnd;
 import org.nutz.mvc.annotation.Param;
 
-
 @IocBean
 @InjectName("webAct")
 @At("/web")
 @Fail("json")
-public class WebAct extends CommAction{
-	
-	private static final Log log = Logs.getLog(WebAct.class);
+public class WebAct extends CommAction {
 
-	@Inject
-	private ShopSrv shopSrv;
-        
-        @Inject
-        private SearchSrv searchSrv;
-        
-        @Inject
-        private ProductSrv productSrv;
-        
-        @Inject
-        private ProductImgSrv productImgSrv;
+    private static final Log log = Logs.getLog(WebAct.class);
+    @Inject
+    private ShopSrv shopSrv;
+    @Inject
+    private SearchSrv searchSrv;
+    @Inject
+    private ProductSrv productSrv;
+    @Inject
+    private ProductImgSrv productImgSrv;
 
-        @At
-	@Ok("json")
-	public Map shop_list() {
-		List<Shop>  shop_list =  shopSrv.queryObjs();
-                Map<Object, Object> map = new HashMap<Object, Object>();  
-                map.put("ad_list", shop_list);
-                return map;
-	}
-        
-        @At
-	@Ok("json")
-	public Map search_list() {
-		List<Search>  search_list =  searchSrv.queryObjs();
-                Map<Object, Object> map = new HashMap<Object, Object>();  
-                map.put("search_list", search_list);
-                return map;
-	}
-        
-        @At
-	@Ok("json")
-	public Map product_list(@Param("..") Page p) {
-		List<Product>  product_list =  productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
-                Map<Object, Object> map = new HashMap<Object, Object>();  
+    @At
+    @Ok("json")
+    public Map shop_list() {
+        List<Shop> shop_list = shopSrv.queryObjs();
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        map.put("ad_list", shop_list);
+        return map;
+    }
+
+    @At
+    @Ok("json")
+    public Map search_list() {
+        List<Search> search_list = searchSrv.queryObjs();
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        map.put("search_list", search_list);
+        return map;
+    }
+
+    @At
+    @Ok("json")
+    public Map product_list(@Param("..") Page p) {
+        if (p == null || p.getPageNum() == 1) {
+            Map map = CacheData.getInstance().getNewProductMap();
+            if (map == null) {
+                List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
+                map = new HashMap<Object, Object>();
                 map.put("product_list", product_list);
-                return map;
-	}
-        
-        @At
-	@Ok("json")
-	public Map productimg_list(@Param("productid") Long productid) {
-		List<ProductImg>  list =  productImgSrv.queryObjs(Cnd.wrap("productid = "+productid));
-                Map<Object, Object> map = new HashMap<Object, Object>();  
-                map.put("productimg_list", list);
-                return map;
-	}
-        
-}
+                CacheData.getInstance().setNewProductMap(map);
+            }
+            return CacheData.getInstance().getNewProductMap();
+        } else {
+            List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
+            Map<Object, Object> map = new HashMap<Object, Object>();
+            map.put("product_list", product_list);
+            return map;
+        }
+    }
 
+    @At
+    @Ok("json")
+    public Map productSale_list(@Param("..") Page p) {
+        if (p == null || p.getPageNum() == 1) {
+            Map map = CacheData.getInstance().getSaleProductMap();
+            if (map == null) {
+                List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by ordernum"), p);
+                map = new HashMap<Object, Object>();
+                map.put("product_list", product_list);
+                CacheData.getInstance().setSaleProductMap(map);
+            }
+            return CacheData.getInstance().getSaleProductMap();
+        } else {
+            List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by ordernum"), p);
+            Map<Object, Object> map = new HashMap<Object, Object>();
+            map.put("product_list", product_list);
+            return map;
+        }
+    }
+
+    @At
+    @Ok("json")
+    public Map productimg_list(@Param("productid") Long productid) {
+        List<ProductImg> list = productImgSrv.queryObjs(Cnd.wrap("productid = " + productid));
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        map.put("productimg_list", list);
+        return map;
+    }
+}

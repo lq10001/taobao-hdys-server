@@ -5,52 +5,37 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
 
 @Table("product")
-public class Product{
-    
-    	@Id
-	
-	@Column
-	private Long  productid;
+public class Product {
 
-	
-	@Column
-	private String  num_iid;	
+    @Id
+    @Column
+    private Long productid;
+    @Column
+    private String num_iid;
+    @Column
+    private String url;
+    @Column
+    private String pic_url;
+    @Column
+    private String price;
+    @Column
+    private String title;
+    @Column
+    private String nick;
+    @Column
+    private Long num;
+    @Column
+    private Long cid;
+    @Column
+    private Long orderNum;
 
-	@Column
-	private String  url;	
+    public String getNum_iid() {
+        return num_iid;
+    }
 
-        
-	@Column
-	private String  pic_url;	
-
-	
-	@Column
-	private String  price;	
-
-	
-	@Column
-	private String  title;	
-
-	
-	@Column
-	private String  nick;	
-
-	
-	@Column
-	private Long  num;	
-
-	
-	@Column
-	private Long  cid;	
-        
-
-        public String getNum_iid() {
-            return num_iid;
-        }
-
-        public void setNum_iid(String num_iid) {
-            this.num_iid = num_iid;
-        }
+    public void setNum_iid(String num_iid) {
+        this.num_iid = num_iid;
+    }
 
     public String getUrl() {
         return url;
@@ -59,71 +44,68 @@ public class Product{
     public void setUrl(String url) {
         this.url = url;
     }
-        
-        
 
-        public String getPic_url() {
-            return pic_url;
-        }
+    public String getPic_url() {
+        return pic_url;
+    }
 
-        public void setPic_url(String pic_url) {
-            this.pic_url = pic_url;
-        }
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
+    }
 
+    public String getPrice() {
+        return price;
+    }
 
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
-	public String getPrice() {
-		return price;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setPrice(String  price) {
-		this.price = price;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getNick() {
+        return nick;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 
-	public void setTitle(String  title) {
-		this.title = title;
-	}
+    public Long getNum() {
+        return num;
+    }
 
+    public void setNum(Long num) {
+        this.num = num;
+    }
 
-	public String getNick() {
-		return nick;
-	}
+    public Long getCid() {
+        return cid;
+    }
 
-	public void setNick(String  nick) {
-		this.nick = nick;
-	}
+    public void setCid(Long cid) {
+        this.cid = cid;
+    }
 
+    public Long getProductid() {
+        return productid;
+    }
 
-	public Long getNum() {
-		return num;
-	}
+    public void setProductid(Long productid) {
+        this.productid = productid;
+    }
 
-	public void setNum(Long  num) {
-		this.num = num;
-	}
+    public Long getOrderNum() {
+        return orderNum;
+    }
 
-
-	public Long getCid() {
-		return cid;
-	}
-
-	public void setCid(Long  cid) {
-		this.cid = cid;
-	}
-
-
-	public Long getProductid() {
-		return productid;
-	}
-
-	public void setProductid(Long  productid) {
-		this.productid = productid;
-	}
-
+    public void setOrderNum(Long orderNum) {
+        this.orderNum = orderNum;
+    }
 }
-

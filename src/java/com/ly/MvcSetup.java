@@ -4,6 +4,7 @@ import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
 
 import com.ly.comm.AppContext;
+import com.ly.comm.CacheData;
 
 public class MvcSetup implements Setup {
 
@@ -20,7 +21,7 @@ public class MvcSetup implements Setup {
 		AppContext.ioc = config.getIoc();
 		
 		//初始化基础信息数据
-//		CBData.getInstance().init();
+		CacheData.getInstance().init();
 	}
 
 }

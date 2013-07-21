@@ -40,5 +40,9 @@
 		<servlet-name>Kaptcha</servlet-name>
 		<url-pattern>/kaptcha.jpg</url-pattern>
 	</servlet-mapping>
+        
+        <listener>
+            <listener-class>com.ly.util.TimerListener</listener-class>
+        </listener>
 
 </web-app>
