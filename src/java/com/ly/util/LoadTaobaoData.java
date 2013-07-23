@@ -57,6 +57,7 @@ public class LoadTaobaoData implements Runnable {
                     if (lis.isEmpty()) {
                         continue;
                     }
+                    int j = 1;
                     for (Element li : lis) {
                         product.setUrl(li.attr("href"));
 
@@ -80,12 +81,17 @@ public class LoadTaobaoData implements Runnable {
                         String[] arrSplit3 = arrSplit2[3].split("[.]");
                         String num_iid = arrSplit3[0];
                         product.setNum_iid(num_iid);
+                        
+                        long order = i * 20 + j;
+                        product.setOrderNum(order);
+
 
                         Product old_product = productSrv.queryObj(Cnd.where("num_iid", "=", num_iid));
-
                         //                    
                         if (old_product == null) {
+                            
                             Product newProduct = productSrv.insert(product);
+                            
 
                             doc2 = Jsoup.connect(product.getUrl()).data("query", "java").userAgent("Mozilla").timeout(30000).cookie("auth", "token").post();
 
@@ -104,8 +110,10 @@ public class LoadTaobaoData implements Runnable {
                             }
 
                         } else {
+                            
                             productSrv.update(product);
                         }
+                        j++;
 
                     }
                 }

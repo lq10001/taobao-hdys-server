@@ -35,7 +35,7 @@ public class TimerListener implements ServletContextListener {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);//每天
         //定制每天的5:00:00执行，
-        calendar.set(year, month, day, 14, 52, 00);
+        calendar.set(year, month, day, 5, 00, 00);
         Date date = calendar.getTime();
         
         timer = new Timer();

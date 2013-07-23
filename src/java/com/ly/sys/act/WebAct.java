@@ -67,14 +67,14 @@ public class WebAct extends CommAction {
         if (p == null || p.getPageNum() == 1) {
             Map map = CacheData.getInstance().getNewProductMap();
             if (map == null) {
-                List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
+                List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by ordernum"), p);
                 map = new HashMap<Object, Object>();
                 map.put("product_list", product_list);
                 CacheData.getInstance().setNewProductMap(map);
             }
             return CacheData.getInstance().getNewProductMap();
         } else {
-            List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
+            List<Product> product_list = productSrv.query(Cnd.wrap("productid >0  order by ordernum"), p);
             Map<Object, Object> map = new HashMap<Object, Object>();
             map.put("product_list", product_list);
             return map;
