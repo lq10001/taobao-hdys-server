@@ -9,6 +9,7 @@ import com.ly.sys.vo.Product;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.sf.ehcache.CacheManager;
 import org.nutz.dao.Cnd;
 
 /**
@@ -30,28 +31,7 @@ public class CacheData {
     
 
     public void init()
-    {
-        
-        Page p = new Page();
-        p.setNumPerPage(20);
-        p.setPageNum(1);
-        
-        ProductSrv productSrv = AppContext.getBean(ProductSrv.class);
-        //new
-        List<Product>  product_list =  productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
-        
-        Map<Object, Object> map = new HashMap<Object, Object>();  
-        map.put("product_list", product_list);
-        this.newProductMap = map;
-        
-        //sale
-        List<Product>  sale_product_list =  productSrv.query(Cnd.wrap("productid >0  order by ordernum"), p);
-        
-        Map<Object, Object> map2 = new HashMap<Object, Object>();  
-        map2.put("product_list", sale_product_list);
-        this.saleProductMap = map2;
-        
-        
+    {  
     }
 
     public Map getNewProductMap() {
@@ -70,7 +50,4 @@ public class CacheData {
         this.saleProductMap = saleProductMap;
     }
 
-
-    
-    
 }

@@ -5,15 +5,11 @@
 package com.ly.util;
 
 import com.ly.comm.AppContext;
-import com.ly.comm.CacheData;
-import com.ly.comm.Page;
 import com.ly.sys.srv.ProductImgSrv;
 import com.ly.sys.srv.ProductSrv;
 import com.ly.sys.vo.Product;
 import com.ly.sys.vo.ProductImg;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import net.sf.ehcache.CacheManager;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -39,7 +35,7 @@ public class LoadTaobaoData implements Runnable {
 
         Document doc, doc2;
         try {
-            
+
             for (int i = 0; i < 500; i++) {
                 String str_url = new_url + i;
                 doc = Jsoup.connect(str_url).data("query", "java").userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22").timeout(30000).cookie("auth", "token").post();
@@ -81,18 +77,14 @@ public class LoadTaobaoData implements Runnable {
                         String[] arrSplit3 = arrSplit2[3].split("[.]");
                         String num_iid = arrSplit3[0];
                         product.setNum_iid(num_iid);
-                        
-                        long order = i * 20 + j;
-                        product.setOrderNum(order);
 
+                        long order = i * 20 + j;
+                        product.setOrderNew(order);
 
                         Product old_product = productSrv.queryObj(Cnd.where("num_iid", "=", num_iid));
                         //                    
                         if (old_product == null) {
-                            
                             Product newProduct = productSrv.insert(product);
-                            
-
                             doc2 = Jsoup.connect(product.getUrl()).data("query", "java").userAgent("Mozilla").timeout(30000).cookie("auth", "token").post();
 
                             Elements imgs = doc2.select("table[class=mt] img");
@@ -110,7 +102,7 @@ public class LoadTaobaoData implements Runnable {
                             }
 
                         } else {
-                            
+
                             productSrv.update(product);
                         }
                         j++;
@@ -162,30 +154,17 @@ public class LoadTaobaoData implements Runnable {
                     }
                 }
             }
+            
+        System.out.println("========================================");
+        
+        CacheManager.getInstance().removeCache("product");
+        CacheManager.getInstance().removeCache("productimg");
 
 
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
         
-        
-        Page p = new Page();
-        p.setNumPerPage(20);
-        p.setPageNum(1);
-        
-        //new
-        List<Product>  product_list =  productSrv.query(Cnd.wrap("productid >0  order by productid desc"), p);
-        Map<Object, Object> newMapmap = new HashMap<Object, Object>();  
-        newMapmap.put("product_list", product_list);
-        CacheData.getInstance().setNewProductMap(newMapmap);
 
-        
-        //sale
-        List<Product>  sale_product_list =  productSrv.query(Cnd.wrap("productid >0  order by ordernum"), p);
-        Map<Object, Object> saleMapmap = new HashMap<Object, Object>();  
-        saleMapmap.put("product_list", sale_product_list);
-        CacheData.getInstance().setSaleProductMap(saleMapmap);
-
-        
     }
 }

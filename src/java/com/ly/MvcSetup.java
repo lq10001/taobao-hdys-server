@@ -1,10 +1,10 @@
 package com.ly;
 
-import org.nutz.mvc.NutConfig;
-import org.nutz.mvc.Setup;
-
 import com.ly.comm.AppContext;
 import com.ly.comm.CacheData;
+import net.sf.ehcache.CacheManager;
+import org.nutz.mvc.NutConfig;
+import org.nutz.mvc.Setup;
 
 public class MvcSetup implements Setup {
 
@@ -21,7 +21,13 @@ public class MvcSetup implements Setup {
 		AppContext.ioc = config.getIoc();
 		
 		//初始化基础信息数据
-		CacheData.getInstance().init();
+                CacheManager manager =  CacheManager.create();
+                System.out.println("-------------------- " +manager);
+                for (String str1 : manager.getCacheNames()) {
+                    System.out.println("=========== " + str1);
+                
+            }
+                
 	}
 
 }

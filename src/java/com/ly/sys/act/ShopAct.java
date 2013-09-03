@@ -19,6 +19,7 @@ import com.ly.comm.ParseObj;
 
 import com.ly.sys.vo.Shop;
 import com.ly.sys.srv.ShopSrv;
+import net.sf.ehcache.CacheManager;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.By;
@@ -51,17 +52,6 @@ public class ShopAct extends CommAction{
 		request.setAttribute("shop_list", shop_list);
 		request.setAttribute("page", p);
 	}
-        
-        /*
-        @At
-	@Ok("json")
-	public Map list_json() {
-		List<Ad>  shop_list =  shopSrv.queryObjs();
-                Map<Object, Object> map = new HashMap<Object, Object>();  
-                map.put("shoplist", shop_list);
-                return map;
-	}
-        * */
 
 	@At
 	@Ok("jsp:/WEB-INF/page/sys/shop.jsp")
@@ -83,6 +73,7 @@ public class ShopAct extends CommAction{
 		}else{
 			rtnObj = shopSrv.update(shop);
 		}
+                CacheManager.getInstance().removeCache("shop");
 		return super.tabMap((rtnObj != null)?"200":"300", "shop","closeCurrent");
 	}
 	

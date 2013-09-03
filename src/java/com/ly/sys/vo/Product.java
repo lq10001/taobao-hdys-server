@@ -28,6 +28,10 @@ public class Product {
     private Long cid;
     @Column
     private Long orderNum;
+    
+    @Column
+    private Long orderNew;
+    
 
     public String getNum_iid() {
         return num_iid;
@@ -108,4 +112,14 @@ public class Product {
     public void setOrderNum(Long orderNum) {
         this.orderNum = orderNum;
     }
+
+    public Long getOrderNew() {
+        return orderNew;
+    }
+
+    public void setOrderNew(Long orderNew) {
+        this.orderNew = orderNew;
+    }
+    
+    
 }

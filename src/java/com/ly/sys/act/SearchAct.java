@@ -21,6 +21,7 @@ import com.ly.comm.Page;
 import com.ly.comm.ParseObj;
 import com.ly.sys.srv.SearchSrv;
 import com.ly.sys.vo.Search;
+import net.sf.ehcache.CacheManager;
 
 
 
@@ -67,6 +68,7 @@ public class SearchAct extends CommAction{
 		}else{
 			rtnObj = searchSrv.update(search);
 		}
+                CacheManager.getInstance().removeCache("search");
 		return super.tabMap((rtnObj != null)?"200":"300", "search","closeCurrent");
 	}
 	
