@@ -81,8 +81,15 @@ public class MenuMdl extends CommAction{
 		
 		request.setAttribute("username", username);
 		session.setAttribute("username", username);
+                
+                if (username.equals("dongfangx1")) {
+                    return new JspView("/WEB-INF/index2.jsp");
+
+                }else{
+                    return new JspView("/WEB-INF/index.jsp");
+
+                }
 		
-		return new JspView("/WEB-INF/index.jsp");
 	}
 	
 	@At

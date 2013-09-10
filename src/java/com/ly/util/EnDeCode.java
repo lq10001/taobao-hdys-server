@@ -46,8 +46,7 @@ public class EnDeCode {
 
 	public static void main(String[] args) {
 		EnDeCode azdg = new EnDeCode();
-		System.out.println(System.currentTimeMillis() / 1000);
-		String clearText = "";// 明文
+		String clearText = "liliang89";// 明文
 		String a1  = azdg.getMD5Str(clearText);
 		System.out.println(a1);
 	}

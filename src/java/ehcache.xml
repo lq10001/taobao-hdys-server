@@ -9,7 +9,7 @@
            timeToIdleSeconds="3600"
            timeToLiveSeconds="3600"
            overflowToDisk="true"
-           diskSpoolBufferSizeMB="5" />
+           diskSpoolBufferSizeMB="10" />
 
     
     <cache name="product"

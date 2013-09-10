@@ -116,27 +116,8 @@ $(function(){
 					</div>
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
-							<li><a href="<%=path%>/sys/menu/list" target="navTab" rel="menu">菜单管理</a></li>
-                                                        <!-- 
-							<li><a href="<%=path%>/note/list" target="navTab" rel="note">笔记管理</a></li>
-							<li><a href="<%=path%>/note/review" target="navTab" rel="note">今日计划和复习</a></li>
-							
-							<li><a href="new.jsp" target="navTab" rel="dlg_page2">用户菜单管理</a></li>
-							 -->
-						</ul>
-					</div>
-					
-					<div class="accordionHeader">
-						<h2><span>Folder</span>CMS管理</h2>
-					</div>
-					<div class="accordionContent">
-						<ul class="tree treeFolder">
-							<li><a href="<%=path%>/sys/global/edit" target="navTab" rel="employee">设置淘宝应用会话</a></li>
-							<li><a href="<%=path%>/sys/product/list" target="navTab" rel="product">产品管理</a></li>
-							<li><a href="<%=path%>/sys/employee/list" target="navTab" rel="employee">资料管理</a></li>							
-							<li><a href="<%=path%>/sys/shop/list" target="navTab" rel="shop">店铺管理</a></li>
-                                                        <li><a href="<%=path%>/sys/search/list" target="navTab" rel="search">搜索管理</a></li>
-                                                        
+							<li><a href="<%=path%>/note/list" target="navTab" rel="note">测试1</a></li>
+							<li><a href="<%=path%>/note/review" target="navTab" rel="note">测试2</a></li>
 						</ul>
 					</div>
 				</div>
