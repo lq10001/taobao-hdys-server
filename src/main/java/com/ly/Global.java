@@ -5,7 +5,7 @@ package com.ly;
  */
 public class Global {
 
-    public static String PROJECT_NAME = "fund";
+    public static String PROJECT_NAME = "taobao";
 
 
 }

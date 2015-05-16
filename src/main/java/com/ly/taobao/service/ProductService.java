@@ -49,6 +49,22 @@ public class ProductService extends IdEntityService<Product> {
         return num.intValue();
     }
 
+    public List<Product> querySaleProducts(Page p)
+    {
+        String cacheName = "sale_product_page_"+p.getPageNumber();
+        CacheManager manager = CacheManager.getInstance();
+        Cache cache = manager.getCache("product");
+        Element element = cache.get(cacheName);
+        if(element == null)
+        {
+            List<Product> product_list = this.query(Cnd.wrap("id >0  order by ordernum"), p);
+            cache.put(new Element(cacheName, product_list));
+            return product_list;
+        }else{
+            return (List<Product>)element.getValue();
+        }
+    }
+
 
 
 }

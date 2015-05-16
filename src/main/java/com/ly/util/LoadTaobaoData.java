@@ -30,7 +30,18 @@ public class LoadTaobaoData implements Runnable {
     public void run() {
 
         ProductService productSrv = AppContext.getBean(ProductService.class);
+
+        if (productSrv == null)
+        {
+            return;
+        }
+
         ProductimgService productImgSrv = AppContext.getBean(ProductimgService.class);
+
+        if (productImgSrv == null)
+        {
+            return;
+        }
 
 
         Document doc, doc2;
@@ -60,8 +71,11 @@ public class LoadTaobaoData implements Runnable {
                         //img new_url
                         Element img = li.select("img").first();
                         String img_url = img.attr("src");
-                        int len = img_url.lastIndexOf("_145x145.jpg");
-                        product.setPicurl(img_url.substring(0, len));
+                        int len = img_url.indexOf(".jpg");
+                        if (len > 1)
+                        {
+                            product.setPicurl(img_url.substring(0, len) + ".jpg");
+                        }
 
                         //title
                         Element pTitle = li.select("p[class=tit]").first();
@@ -87,15 +101,20 @@ public class LoadTaobaoData implements Runnable {
                             Product newProduct = productSrv.dao().insert(product);
                             doc2 = Jsoup.connect(product.getUrl()).data("query", "java").userAgent("Mozilla").timeout(30000).cookie("auth", "token").post();
 
-                            Elements imgs = doc2.select("table[class=mt] img");
+                            Elements imgs = doc2.select("div[class=main] img");
                             if (!imgs.isEmpty()) {
                                 for (Element img2 : imgs) {
                                     Productimg pi = new Productimg();
                                     pi.setProductid(newProduct.getId());
 
                                     String img_url2 = img2.attr("src");
-                                    int len2 = img_url2.lastIndexOf("_70x70.jpg");
-                                    pi.setUrl(img_url2.substring(0, len2));
+                                    int len2 = img_url2.indexOf(".jpg");
+                                    if (len2 < 1)
+                                    {
+                                        System.out.println("----- productImg url split error !!! ---");
+                                        continue;
+                                    }
+                                    pi.setUrl(img_url2.substring(0, len2) + ".jpg");
 
                                     productImgSrv.dao().insert(pi);
                                 }
