@@ -9,9 +9,9 @@
 1. 主页
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/210704_997cf683_3018.png "在这里输入图片标题")
 2. 菜单
-![![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/210718_fdcb22a9_3018.png "在这里输入图片标题")](https://mmbiz.qpic.cn/mmbiz/ZxibLSBRKqOmujiaicyibcopTdzet3sxDiaKkwn83EfvzxZLXVwKg2M4B4x63HJJWBAtSDg0ticZCM2hCoNuR5uOhnEA/640?wx_fmt=png&wxfrom=5&wx_lazy=1 "在这里输入图片标题")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/211544_5837717a_3018.png "在这里输入图片标题")
 3. 推荐
-![![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/210728_bf5dec8f_3018.png "在这里输入图片标题")](https://mmbiz.qpic.cn/mmbiz/ZxibLSBRKqOmujiaicyibcopTdzet3sxDiaKkva1PY3mWRjdrpUibMuup7Ugh780bpAnsxic1bnCMMYia3DXhDqRZB8w2A/640?wx_fmt=png&wxfrom=5&wx_lazy=1 "在这里输入图片标题")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/211600_66a62085_3018.png "在这里输入图片标题")
 4. 详情
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/210742_45d4c1bd_3018.png "在这里输入图片标题")
 5. 分享
